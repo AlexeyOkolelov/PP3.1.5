@@ -56,7 +56,7 @@ fetch('/rest/user').then(
                 temp += "<td>";
                 let rolesStr = "";
                 data.roles.forEach(r => {
-                    rolesStr += r.role + " ";
+                    rolesStr += r.role.replaceAll("ROLE_", "") + " ";
                 })
                 temp += rolesStr + "</td>" + "</tr>";
                 document.getElementById("tableUserBody2").innerHTML = temp;
@@ -88,7 +88,7 @@ $('#addUserBtn').click(function () {
         roles: []
     };
     newUser.email = document.getElementById("emailNew").value;
-    newUser.name = document.getElementById("firstNameNew").value;
+    newUser.name = document.getElementById("nameNew").value;
     newUser.age = document.getElementById("AgeNew").value;
     newUser.password = document.getElementById("passwordNew").value;
     newUser.roles = [];
@@ -111,7 +111,7 @@ $('#addUserBtn').click(function () {
                 allUsers.push(u);
                 createTable(allUsers);
             })
-            document.getElementById("firstNameNew").value = "";
+            document.getElementById("nameNew").value = "";
             document.getElementById("AgeNew").value = "";
             document.getElementById("emailNew").value = "";
             document.getElementById("passwordNew").value = "";
@@ -146,7 +146,7 @@ $('#editUserBtn').click(function () {
     $('#editModal').modal('hide');
     edit.id = document.getElementById("idEditModal").value;
     edit.age = document.getElementById("ageEditModal").value;
-    edit.name = document.getElementById("firstNameEditModal").value;
+    edit.name = document.getElementById("nameEditModal").value;
     edit.email = document.getElementById("emailEditModal").value;
     edit.password = document.getElementById("passwordEditModal").value;
     edit.roles = [];
@@ -195,8 +195,6 @@ $('#delUserBtn').click(function () {
                 let u = getUserById(id);
                 let i = allUsers.indexOf(u);
                 delete allUsers[i];
-            } else {
-                alert("Удаление не удалось: " + res.status);
             }
         });
 })
@@ -208,7 +206,7 @@ function fEdit(el) {
         if (u.id == id) {
             console.log(u);
             document.getElementById("idEditModal").value = u.id;
-            document.getElementById("firstNameEditModal").value = u.name;
+            document.getElementById("nameEditModal").value = u.name;
             document.getElementById("ageEditModal").value = u.age;
             document.getElementById("emailEditModal").value = u.email;
             document.getElementById("passwordEditModal").value = u.password;
@@ -235,7 +233,7 @@ function fDel(el) {
     allUsers.forEach(u => {
         if (u.id == id) {
             document.getElementById("idDelModal").value = u.id;
-            document.getElementById("firstNameDelModal").value = u.name;
+            document.getElementById("nameDelModal").value = u.name;
             document.getElementById("ageDelModal").value = u.age;
             document.getElementById("emailDelModal").value = u.email;
             document.getElementById("passwordDelModal").value = u.password;
