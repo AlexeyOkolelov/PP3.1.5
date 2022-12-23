@@ -35,37 +35,7 @@ public class AdminController {
         return "admin";
     }
 
-    @GetMapping("/addNewUser")
-    public String addNewUser(ModelMap model) {
 
-        model.addAttribute("roles", roleServise.getAllRole());
-        model.addAttribute("person", new User());
-
-        return "userInfo";
-    }
-
-    @PostMapping()
-    public String addUser(@ModelAttribute("person") User user) {
-
-        userServise.addUser(user);
-
-        return "redirect:/admin";
-    }
-
-    @DeleteMapping("user-delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
-        userServise.deleteUserById(id);
-        return "redirect:/admin";
-
-    }
-
-    @GetMapping("/user-update/{id}")
-    public String updateUser(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("person", userServise.findUserById(id));
-        List<Role> roles = roleServise.getAllRole();
-        model.addAttribute("roles", roles);
-        return "userInfo";
-    }
 
 
 

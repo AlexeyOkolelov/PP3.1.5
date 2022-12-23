@@ -9,7 +9,7 @@ public interface UserService {
 
     List<User> getAllUser();
 
-    void addUser(User user);
+    User addUser(User user);
 
     User findUserById(Long id);
 
